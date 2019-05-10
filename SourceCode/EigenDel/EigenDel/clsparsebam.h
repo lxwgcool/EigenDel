@@ -10,7 +10,7 @@
 //#include "clsdrawimage.h"
 #include <map>
 
-#include "../../../ShareLibrary/bamtools/install/include/bamtools/api/BamReader.h"
+#include "../../../ShareLibrary/bamtools/include/api/BamReader.h"
 using namespace BamTools;
 
 using namespace std;
@@ -291,7 +291,7 @@ public:
 
 public:
     void ReadBamFile(string strBamFilePath, vector<BamAlignment>& vAl);
-    void CalcInsertSize(string strBamFilePath);
+    void CalcInsertSize(string strBamFilePath, string strPicard);
     void CalcAvgDepth(string strBamFilePath);
 
     //Get to types of reads

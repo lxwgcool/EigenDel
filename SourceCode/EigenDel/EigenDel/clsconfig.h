@@ -13,6 +13,7 @@ struct St_Config
     string strBamFile; //BAMFILE
     string strRef; // Reference File
     string strPythonCode;
+    string strPicard;
 
     string strMultiAlignSeq;
     string strPindelPath;
@@ -25,7 +26,8 @@ struct St_Config
     string strSampleName;
     string strChrom;
 
-    St_Config():strVcf(""), strBamFile(""), strRef(""), strPythonCode(""), strMultiAlignSeq(""),
+
+    St_Config():strVcf(""), strBamFile(""), strRef(""), strPythonCode(""), strPicard(""), strMultiAlignSeq(""),
                 strPindelPath(""), strLumpyPath(""), strDellyPath(""), strSpritesPath(""),
                 strGASVproPath(""), strCNVnatorPath(""), strSampleName(""), strChrom("")
     {}

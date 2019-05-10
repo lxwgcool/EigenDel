@@ -33,7 +33,7 @@ void ClsParseBam::ReadBamFile(string strBamFilePath, vector<BamAlignment>& vAl)
     pBamReader = NULL;
 }
 
-void ClsParseBam::CalcInsertSize(string strBamFilePath)
+void ClsParseBam::CalcInsertSize(string strBamFilePath, string strPicard)
 {
     //here we use picard to calculate the average insert size and the insert size standard deviation    
     string strMatricsFile = "./Output/insert_size_metrics_Chrom_" + m_strChromName + ".txt";
@@ -41,7 +41,7 @@ void ClsParseBam::CalcInsertSize(string strBamFilePath)
     string strBreifISFile = "./Output/brief_info_insert_size_Chrom_" + m_strChromName + ".txt";
     //string strPicardOutput = "./picard_chrom_" + m_strChromName + ".output";
 
-    string strCmd = (string)"java -XX:ParallelGCThreads=24 -jar /home/hpc-xin/software/picard/picard/build/libs/picard.jar CollectInsertSizeMetrics " +
+    string strCmd = (string)"java -XX:ParallelGCThreads=24 -jar " + strPicard + " CollectInsertSizeMetrics " +
                     "I=" + strBamFilePath + " " +
                     "O=" + strMatricsFile + " " +
                     "H=" + strHistogramFile + " " +

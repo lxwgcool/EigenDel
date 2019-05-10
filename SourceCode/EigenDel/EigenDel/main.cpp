@@ -32,7 +32,7 @@ struct St_FindSvDEL
     string strChromName;
     string strSampleName;
     string strBamFilePath;
-    string strPythonCodePath;
+    string strPythonCodePath;    
 
     //--> this is for the case of using the statistic value of the whole genome
     //    (Not chromosome by chromosome respectively)
@@ -55,9 +55,9 @@ struct St_FindSvDEL
               St_ChromSV* pV2,
               string strV3, string strV4,
               string strV5,
-              string strV6,
-              St_ChromBorderSCR* pV7, St_ChromDiscordantReads* pV8,
-              bool bV9)
+              string strV6,              
+              St_ChromBorderSCR* pV8, St_ChromDiscordantReads* pV9,
+              bool bV10)
     {
         //pVFasta = pV1;
         pSTDChromSV = pV2;
@@ -65,12 +65,12 @@ struct St_FindSvDEL
         strChromName = strV3;
         strSampleName = strV4;
         strBamFilePath = strV5;
-        strPythonCodePath = strV6;
+        strPythonCodePath = strV6;        
 
-        pChromSCR = pV7;
-        pChromDR = pV8;
+        pChromSCR = pV8;
+        pChromDR = pV9;
 
-        bTargetReadsGood = bV9;
+        bTargetReadsGood = bV10;
 
         stFinalResult.Clear();
     }
@@ -83,7 +83,8 @@ struct St_FindSvDEL
         strChromName = "";
         strSampleName = "";
         //strBamFilePath = "";
-        strPythonCodePath = "";
+        strPythonCodePath = "";       
+
         stFinalResult.Clear();
 
         fAvgInsertSize = -1;
@@ -435,7 +436,7 @@ void FindDelByChrom(St_Config& stConfig, vector<St_Fasta>& vFasta, vector<St_Chr
 #ifdef GLOBALWHOLEGENO
     ClsParseBam* pClsParseBam = new ClsParseBam();
     //1: Get global insert size
-    pClsParseBam->CalcInsertSize(stConfig.strBamFile);
+    pClsParseBam->CalcInsertSize(stConfig.strBamFile, stConfig.strPicard);
     cout << "Calc Insert Size Done!" << endl;
     //2: Get global depth
     pClsParseBam->CalcAvgDepth(stConfig.strBamFile);

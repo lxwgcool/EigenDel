@@ -32,6 +32,8 @@ void ClsConfig::ReadConfig(St_Config& stConfig, const char* cpIniPath)
                     stConfig.strRef = itrmp->second.c_str();
                 else if(itrmp->first == "PythonCode")
                     stConfig.strPythonCode = itrmp->second.c_str();
+                else if(itrmp->first == "Picard")
+                    stConfig.strPicard = itrmp->second.c_str();
                 else if(itrmp->first == "SampleName")
                     stConfig.strSampleName = itrmp->second.c_str();
                 else if(itrmp->first == "ChromIndex") //Index start from 1
