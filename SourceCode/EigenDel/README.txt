@@ -41,6 +41,25 @@ DellyPath=
 GASVproPath=
 CNVnatorPath=
 
+*The meaning of each configure option
+a) VCF: 
+The SV annotation file provided by benchmark dataset, such as 1000 genomes project. This file is only for comparsion and generate scatter plot.
+b) BamFile:
+Reads alignment result.
+c) Ref: 
+Reference file used in BAM
+d) PythonCode:
+Python code used by supervised learning
+e) Picard
+The parth of picard
+f) SampleName
+The sample name you want to analysis
+g) ChromIndex
+The chromosome you want to analysis. Leave it be blank for analyzing the whole genome.
+h) MultiAlignSeq -> discarded
+i) PindelPath, LumpyPath, DellyPath, GASVproPath, CNVnatorPath
+The path of each tool for comparison.
+
 (2) Run EigenDel
 $ EigenDel ./config.ini
 
