@@ -13,7 +13,9 @@ This is the introduction of how to compile and use EigenDel
 (4) python 3 with scikit-learn be installed 
 
 Notice: 
-(1)Picard v2.0.1 requires Java 1.8 (jdk8u66) and R.   
+(1)Picard v2.0.1 requires Java 1.8 (jdk8u66) and R.
+(2) Use UConn HPC as an example, the modules below are loaded:
+module load samtools/1.3 gcc/5.4.0-alt java/1.8.0_31 sqlite/3.18.0 tcl/8.6.6.8606 python/3.6.1 r/3.1.1
 
 
 3: How to compile EigenDel 
@@ -26,12 +28,18 @@ $ make
 (1) Set configure file: "config.ini"
 [Debug]
 VCF=/scratch/xil14026/sv/data/1000Genome/phase3_sv/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf
-BamFile=/scratch/xil14026/sv/data/1000Genome/phase3_sv/Samples/NA12775/whole_genome_bam/NA12775.mapped.ILLUMINA.bwa.CEU.low_coverage.20130415.bam
+BamFile=/scratch/xil14026/sv/data/1000Genome/phase3_sv/Samples/NA12763/whole_genome_bam/NA12763.mapped.ILLUMINA.bwa.CEU.low_coverage.20130502.bam
 Ref=/scratch/xil14026/sv/data/1000Genome/phase3_sv/ref/hs37d5.fa
 PythonCode=../../../../Learning/SvLearning/SvClutering.py
-SampleName=NA12775
+Picard=/home/hpc-xin/software/picard/picard/build/libs/picard.jar
+SampleName=NA12763
 ChromIndex=
 MultiAlignSeq=
+PindelPath=
+LumpyPath=
+DellyPath=
+GASVproPath=
+CNVnatorPath=
 
 (2) Run EigenDel
 $ EigenDel ./config.ini
