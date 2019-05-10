@@ -1,0 +1,2 @@
+def TrainingSVM(arrayPos, arrayNeg):
+    return;

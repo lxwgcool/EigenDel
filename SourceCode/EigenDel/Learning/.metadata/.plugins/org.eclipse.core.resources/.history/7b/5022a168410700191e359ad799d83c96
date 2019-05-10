@@ -1,0 +1,9 @@
+#Let's read the file first 
+
+def ReadPositiveSamples(filename):
+    return;
+
+
+#This is the man function
+strPositiveFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/PositiveSamples.txt";
+ReadPositiveSamples(strPositiveFilePath)

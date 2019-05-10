@@ -1,0 +1,24 @@
+from sklearn import svm
+
+def TrainingSVM(arrayPos, arrayNeg): #  Do tomorrow
+    #1: Prepare data
+    print(arrayPos.shape);
+    numPosSample, numPosFeature = arrayPos.shape
+    print (numPosSample, numPosFeature)
+    
+    print(arrayNeg.shape);
+    numNegSample, numNegFeature = arrayNeg.shape
+    print(numNegSample, numNegFeature);
+        
+    arryArray = [];
+    for i in range(0, numPosSample): # add label for positive samples
+     arryArray.append(1)
+    for i in range(0, numNegSample): # add label for negative samples
+     arryArray.append(0)
+    print len(arryArray)    
+    
+    #Get Sample sum 
+    arraySampleSum = concatenate(arrayPos, arrayNeg)
+    #2: SVM Training -->
+    
+    return;

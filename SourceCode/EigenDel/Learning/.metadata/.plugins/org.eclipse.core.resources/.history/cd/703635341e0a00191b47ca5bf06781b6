@@ -1,0 +1,17 @@
+from sklearn import svm
+
+def TrainingSVM(arrayPos, arrayNeg): #  Do tomorrow
+    #1: Prepare data
+    print(arrayPos.shape);
+    numPosSample, numPosFeature = arrayPos.shape
+    print (numPosSample, numPosFeature)
+    
+    print(arrayNeg.shape);
+    numNegSample, numNegFeature = arrayNeg.shape
+    print(numNegSample, numNegFeature);
+        
+    arryArray = [];
+    
+    #2: SVM Training -->
+    
+    return;

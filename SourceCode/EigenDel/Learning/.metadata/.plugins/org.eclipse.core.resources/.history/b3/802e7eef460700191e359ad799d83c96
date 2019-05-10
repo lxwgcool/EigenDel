@@ -1,0 +1,28 @@
+import numpy as np
+import scipy as sp
+#Let's read the file first 
+
+def ReadPositiveSamples(filename, nparryFeatures):
+    ofs = open(filename, "r");
+    lines = ofs.readlines();
+    features = []
+    for line in lines:
+        features.append(line.split("\t"))
+    nparryFeatures = np.array(features)
+    nparryFeatures = nparryFeatures[:,2:] 
+    print (nparryFeatures.shape)
+    for row in nparryFeatures:        
+        row[0] = row[0].split("---")[1]
+
+    print (nparryFeatures[0])
+    
+    
+    #Erase the first three columns 
+    
+    
+    return;
+
+
+#This is the man function
+strPositiveFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/PositiveSamples.txt";
+ReadPositiveSamples(strPositiveFilePath)

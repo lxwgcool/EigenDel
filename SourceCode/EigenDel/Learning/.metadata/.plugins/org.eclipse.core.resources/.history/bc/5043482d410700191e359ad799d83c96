@@ -1,0 +1,8 @@
+#Let's read the file first 
+
+def ReadPositiveSamples(filename):
+    return;
+
+
+#This is the man funciton
+strPositiveFilePath = ""; 

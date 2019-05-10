@@ -1,0 +1,26 @@
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+
+def ReadFile(filePath):
+    ofs = open(filePath, "r");
+    lines = ofs.readlines();
+    features = [];
+    for line in lines:
+        features.append(line.split(","))
+    nparryFeatures = np.array(features)
+    nparryFeatures = nparryFeatures.astype(np.int)       
+    return nparryFeatures
+
+X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+features = ['sepal length', 'sepal width']
+
+print(pd.DataFrame(data = X, columns = features).head())
+
+# pca = PCA(n_components=2)
+# print(pca)
+# pca.fit(X)
+# print(pca.explained_variance_ratio_)
+# print(pca.singular_values_)    

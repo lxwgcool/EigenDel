@@ -1,0 +1,58 @@
+import numpy as np
+import scipy as sp
+import ast
+import sys
+from TrainingFunc import TrainingSVM
+#Let's read the file first 
+
+def ReadPositiveSamples(filename):
+    ofs = open(filename, "r");
+    lines = ofs.readlines();
+    features = []
+    for line in lines:
+        features.append(line.split("\t"))  
+    nparryFeatures = np.array(features)      
+    nparryFeatures = nparryFeatures[:,2:] 
+    for row in nparryFeatures:        
+        row[0] = row[0].split("---")[1] #erase the useless part of positive sample file        
+    #Change the data to correct data type
+    rowNum, colNum = nparryFeatures.shape
+    for i in range(0, rowNum):
+        for j in range(0, colNum):
+            nparryFeatures[i][j] = 1# float(nparryFeatures[i][j])
+            print(type(nparryFeatures[i][j]))
+            break
+        break
+            #nparryFeatures[i][j] = ast.literal_eval(nparryFeatures[i][j])
+
+    print(nparryFeatures.shape)
+    print(nparryFeatures[0])          
+    return nparryFeatures;
+
+def ReadNegativeSamples(filename):
+    ofs = open(filename, "r");
+    lines = ofs.readlines();
+    features = []
+    for line in lines:
+        features.append(line.split("\t"))  
+    nparryFeatures = np.array(features)          
+    return nparryFeatures;
+
+
+#This is the man function
+#Step1: For positive Samples
+strPositiveFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/PositiveSamples.txt";
+nparryPosFeatures = ReadPositiveSamples(strPositiveFilePath)
+print (nparryPosFeatures.shape)
+print (nparryPosFeatures[0])
+
+#Step 2: For negative samples
+strNegativeFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/NegativeSamples.txt";
+nparryNegFeatures = ReadNegativeSamples(strNegativeFilePath)
+print (nparryNegFeatures.shape)
+print (nparryNegFeatures[0])
+  
+#Step 3: Do learning 
+TrainingSVM(nparryPosFeatures, nparryNegFeatures)
+
+    

@@ -1,0 +1,146 @@
+1: Project的目的  --> Go
+(1) 找到所有潜在的Deleltion 　(在这里我们只寻找deleltion)
+　　a) 要找到尽可能多的deletion recorded in 1000 genome
+   b) overlap 其他的结果需要尽可能的多
+(2) 将序列转换成图形进行显示 -->　这是一个新的思维．并没有被很多人尝试和使用
+　　a) 我们不能使用dotplot的思想
+  　　ｉ) 首先这个太慢
+    　ii) 将细节无限放大，没有任何意义
+      iii) 我们确实不需要关心过于细节的序列之间的关系
+(3) 使用deep learning 或者machine learning 的方法进行识别
+   a) 自我重温和学习这个技术
+   b) 将machine learning 引入finding structure variation 里面也算是一种创新，这也是这个project存在和进行的意义之一!!!!
+
+-------------------------------------------------------------------
+2: confident的来源
+(1) 感谢project "ParseBam"
+　　a) 在这个里面我们已经尝试了各种各样的思路，现在头绪和条理都一定程度的清晰了
+   b) 因为delly证明了group的思想是可行的
+   c) 因为DeepSV证明了 depth的思想也是可行的
+   d) 显示在同时考虑depth, clip reads 和 discordant reads的　project并不多,然后这里面用到了learning 以及图形转换思想的更是没有
+(2) 我们已经成功生成了一些图形,　这些图形有很多都还是非常make sense的
+
+-------------------------------------------------------------------
+3: 整个算法的核心思想
+(1) use alignment matrix (Notice: we do not use the idea of Dot Plot!!!)
+(2) tansfer alignment matrxi into the image
+(3) add the info of "discordant reads" and "reads depth" into the image
+(4) use machine learning (deep learning) method to recognize the real potential deletion case.
+
+-------------------------------------------------------------------
+4: 整个project的架构  --> Go
+>>>>>>>>
+Step 1: Parse the input file
+(1) Read Vcf File
+    a) get the interesting part for comparison -->
+       i) right now: we use 1000 genome and the deletion from chromoson 11
+(2) Read bam file
+    a) Save all valid reads
+    b) calculate average coverage
+    c) calculate average insert size
+    d) get the standard diviation
+
+
+>>>>>>>>
+Step 2: Get the target reads
+(1) Get all discordant reads
+
+(2) Get all softclipped reads
+
+
+>>>>>>>>
+Step 3: Get the potential group -->　获得潜在的分组信息　--> 主要是边界信息
+(5) Get the potential group based on discordant reads
+    a) we have some filter to filt the absolutely bad one
+
+(6) Get the potential group based on softclipped reads (split reads)
+
+
+>>>>>>>>
+Step 4:
+(1) Check the reads depth for each potential group
+   a) filer some bad one, which means the coverage dropped in those groups are normal or high
+
+
+>>>>>>>>
+Step 5:
+(1) Collect all of remaning group
+
+(2) For each group: Collect three infomations below:
+   a) Regular reads
+   b) discordant reads
+   c) split reads
+   d) One mapped and one unmapped
+*Notice: the alignmebt result from bam file should be recorded for each affiliated reads
+
+(3) Use those reads to draw  the image
+　a) purpose
+     目的仅仅是找到潜在的deletion,　而不是准备的识别该deletion的左右边界
+  b) Get reference
+     i) Notice: this is not the real reference, we created the "reference" by some special purposes
+     ii) Each reference could is composed by 3 fragments:
+        1) SV Del的前半部分
+        2)　一堆NNNNNNNNNNNNNNNNNNN
+        3) SV Del的后半部分
+     iii) 我们现在还需要scale the image --> to let they are in same size for training
+　c) 在画图的时候，我们现在规划一下颜色 -->对于三种分别对待
+    i)Normal Reads: should be fully mapped
+      1) Yellow
+      2) All of alignment results are based on Bam file
+
+    ii)Discordant Reads
+       Type_1: No Clip
+        1) Orange
+        2) All of alignment results are based on Bam file
+
+       Type_2: Contain Clip
+        1) Alignment Part: Purple --> the alignment info comes from bam file
+        2) Clipped part: Green / Blue
+           ---> the alignment info comes from Blastn
+
+    iii)Split reads
+       (1) The alignment part: red　--> The alignment info comes from bam file
+       (2) clipped part: Green / Blue
+           ---> the alignment info comes from Blastn
+
+    vi)One Mapped and one unmapped
+       (1) The write bar --> Alignment part totally based on the alginment result from bam file
+
+//-> 我们现在不画图了　-> 我们使用最基本的machine learning的东西去解决这个问题
+    我们收集的信息如下:
+    (1) Length: end - start
+    (2) Length: The lowest continuous coverage range
+    (3) Coverage: the second length range
+    (4) Left number of SoftClip form the left side of length2  --> to the left boundary --> 50 size windows
+    (5) Right number of softclip from the right side of length2 --> The the right boundary  --> 50 size windows
+    (6) The total coverage: from start to end
+    (7) The total number of discordant reads
+    (8) The number of reads: one mapped and the mate unmaped
+
+
+//<--
+
+>>>>>>>>
+Step 6:
+(1) Tag each pics and do traning
+   a) May use DNN or regular machine learning method
+   b) anyway we need to use python for data traning
+
+
+>>>>>>>>
+Step 7:
+(1) Once we get the filtered results, calculate real bounday for each potential deletion
+    a) Check the point, where depth drops significantly
+    b) Check the alignment status of clipped reads
+
+
+>>>>>>
+Step 8:
+(1) Output all of detected deletion
+
+
+
+>>>>>
+Strp 9:
+(1) Compare with the results reported by other tools
+

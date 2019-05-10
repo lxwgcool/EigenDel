@@ -1,0 +1,17 @@
+  1) modules         2) pre-module      3) post-module     4) gcc/5.4.0-alt   5) java/1.8.0_31   6) python/2.7.6    7) opencv/3.4.0
+
+
+module load gcc/5.4.0-alt java/1.8.0_31 python/3.6.1
+
+module load gcc/5.4.0-alt java/1.8.0_31 opencv/3.4.0
+
+module load sqlite/3.18.0 tcl/8.6.6.8606 python/3.6.1 r/3.1.1
+
+4) sqlite/3.18.0    5) tcl/8.6.6.8606   6) python/3.6.1
+
+#Notice: the new version of gstreamer doesn't work
+
+--> Dependents
+  1) pre-module       2) post-module      3) gcc/5.4.0-alt    4) java/1.8.0_31    5) sqlite/3.18.0    6) tcl/8.6.6.8606   7) python/3.6.1
+
+module load samtools/1.3 gcc/5.4.0-alt java/1.8.0_31 sqlite/3.18.0 tcl/8.6.6.8606 python/3.6.1 r/3.1.1

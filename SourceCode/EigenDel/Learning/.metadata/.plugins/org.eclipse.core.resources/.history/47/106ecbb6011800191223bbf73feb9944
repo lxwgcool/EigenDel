@@ -1,0 +1,57 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.interpolate import spline
+
+
+def DrawPics(x, y, filePath):    
+    xnew = np.linspace(x.min(), x.max(), 100) #300 represents number of points to make between T.min and T.max 
+    y_smooth = spline(x, y, xnew)
+          
+    # plotting the points
+    plt.subplot(211)
+    plt.ylim(0, y.max() + 1) 
+    plt.xlim(0,x.max())
+    plt.plot(x, y, color='green', linestyle='dashed', linewidth = 2, 
+             marker='o', markerfacecolor='blue', markersize=8)
+      
+    # setting x and y axis range 
+    plt.ylim(0, y.max() + 1) 
+    plt.xlim(0,7) 
+    # naming the x axis 
+    #plt.xlabel('x - axis') 
+    # naming the y axis 
+    #plt.ylabel('y - axis')
+    
+    plt.subplot(212)
+    plt.plot(xnew, y_smooth)
+    
+    # giving a title to my graph 
+    plt.subplot(211)
+    plt.title('Some cool customizations!') 
+      
+    # function to show the plot 
+    plt.show()
+    #plt.savefig(filePath) 
+
+def ReadFile(filePath):
+    ofs = open(filePath, "r");
+    lines = ofs.readlines();
+    features = [];
+    for line in lines:
+        features.append(line.split(","))
+    nparryFeatures = np.array(features)
+    nparryFeatures = nparryFeatures.astype(np.float)       
+    return nparryFeatures
+            
+#Main 
+# x axis values 
+x1 = [1,2,3,4,5] 
+x = np.array(x1)      
+# corresponding y axis values 
+yPositive = ReadFile("./Positive/Positive.txt");
+positiveRoot = "./Positive"
+for i in range (0, rowNum):
+    print positiveRoot + "/" + i + ".txt"
+
+#DrawPics(x, y, "./Positive/1.jpg")
+#DrawPics(x, y, "./Positive/2.jpg")   

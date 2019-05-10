@@ -1,0 +1,40 @@
+1: How to use picard to get average insert size and standard deviation of insert size
+
+(1) Run picard
+java -jar /home/hpc-xin/software/picard/picard/build/libs/picard.jar CollectInsertSizeMetrics  \
+                                I=./NA12878.chrom11.ILLUMINA.bwa.CEU.low_coverage.20121211.bam \
+                                O=insert_size_metrics.txt \
+                                H=insert_size_histogram.pdf \
+                                M=0.5
+
+(2) Parse the result
+head -8 ./insert_size_metrics.txt | tail -n 2 | awk '{ for (i=1; i<=NF; i++) RtoC[i]= (RtoC[i]? RtoC[i] FS $i: $i) }
+    END{ for (i in RtoC) print RtoC[i] }' | awk '{print $1 "\t" $2}'
+
+
+2: Calculate Depth
+(1) Calculate average depth only for the place with coverage
+samtools depth NA12878.chrom11.ILLUMINA.bwa.CEU.low_coverage.20121211.bam | awk '{sum+=$3} END { print "Average = ",sum/NR}'
+
+(2) Calculate average depth for all of positions
+samtools depth -a NA12878.chrom11.ILLUMINA.bwa.CEU.low_coverage.20121211.bam | awk '{sum+=$3} END { print "Average = ",sum/NR}'
+
+(3) Calculate both avarage depth and standard diviation
+samtools depth -a ./NA12878.chrom11.ILLUMINA.bwa.CEU.low_coverage.20121211.bam  |  awk '{sum+=$3; sumsq+=$3*$3} END { print "Average = ",sum/NR; print "Stdev = ",sqrt(sumsq/NR - (sum/NR)**2)}'
+
+(4) Calculate the average depth in reagion (for example: chrom 11 from 100000 to 200000)
+samtools depth -a -r 11:100000-200000 ./NA12878.chrom11.ILLUMINA.bwa.CEU.low_coverage.20121211.bam  |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+
+
+3: Check all depth value only from feature output file
+less NegativeSamples.txt | awk '{print $2 "\t" $4 "\t" $6 "\t" $8  "\t" $9}' | less
+
+4: The tips about how to use picard:
+   VALIDATION_STRINGENCY=LENIENT
+
+https://www.biostars.org/p/55830/
+
+samtools view -bF 4 ./NA12763.mapped.ILLUMINA.bwa.CEU.low_coverage.20130502.bam > NA12763.mapped.ILLUMINA.bwa.CEU.low_coverage.20130502.filtered.bam -@ 12
+
+
+5:

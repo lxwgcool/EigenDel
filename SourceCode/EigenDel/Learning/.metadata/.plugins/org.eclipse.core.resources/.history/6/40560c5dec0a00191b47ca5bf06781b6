@@ -1,0 +1,63 @@
+import numpy as np
+import scipy as sp
+import ast
+import sys
+from TrainingFunc import TrainingSVM
+#Let's read the file first 
+
+def ReadPositiveSamples(filename):
+    ofs = open(filename, "r");
+    lines = ofs.readlines();
+    features = []
+    for line in lines:
+        features.append(line.split("\t"))  
+    nparryFeatures = np.array(features)      
+    nparryFeatures = nparryFeatures[:,2:] 
+    for row in nparryFeatures:        
+        row[0] = row[0].split("---")[1] #erase the useless part of positive sample file        
+    #Change the data to correct data type
+    nparryFeatures = nparryFeatures.astype(np.float)           
+    #print (nparryFeatures[0])    
+    return nparryFeatures;
+
+def ReadNegativeSamples(filename):
+    ofs = open(filename, "r");
+    lines = ofs.readlines();
+    features = []
+    for line in lines:
+        features.append(line.split("\t"))  
+    nparryFeatures = np.array(features)
+    nparryFeatures = nparryFeatures.astype(np.float)              
+    return nparryFeatures;
+
+
+#This is the man function
+#Step1: For positive Samples
+strPositiveFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/PositiveSamples.txt";
+nparryPosFeatures = ReadPositiveSamples(strPositiveFilePath)
+print (nparryPosFeatures.shape)
+#print (nparryPosFeatures[0])
+
+#Step 2: For negative samples
+strNegativeFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/NegativeSamples.txt";
+nparryNegFeatures = ReadNegativeSamples(strNegativeFilePath)
+print (nparryNegFeatures.shape)
+#print (nparryNegFeatures[0])
+
+#Step 3: Read Testing Data --> Go!!
+strPosTesting = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/PosTesting.txt"
+nparryPosTesting = ReadPositiveSamples(strPosTesting)
+# print(nparryPosTesting.shape)
+# for i in range(0, nparryPosTesting.shape[0]):
+#     for j in range(0, nparryPosTesting.shape[1]):
+#         print(type(nparryPosTesting[i][j]))
+#     break;
+# print(nparryPosTesting[0])
+
+# Read Negative Testing data --> Go!!
+
+
+#Step 3: Do learning 
+TrainingSVM(nparryPosFeatures, nparryNegFeatures, nparryPosTesting)
+
+    

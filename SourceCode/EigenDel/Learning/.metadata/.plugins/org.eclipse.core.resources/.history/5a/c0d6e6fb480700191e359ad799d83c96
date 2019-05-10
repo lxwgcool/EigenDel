@@ -1,0 +1,4 @@
+def TrainingSVM(arrayPos, arrayNeg): #  Do tomorrow
+    print(arrayPos.shape);
+    print(arrayNeg.shape);
+    return;

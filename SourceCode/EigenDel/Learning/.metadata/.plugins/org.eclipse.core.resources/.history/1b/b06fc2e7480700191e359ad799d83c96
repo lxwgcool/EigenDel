@@ -1,0 +1,3 @@
+def TrainingSVM(arrayPos, arrayNeg):
+    print(arrayPos.shape)
+    return;

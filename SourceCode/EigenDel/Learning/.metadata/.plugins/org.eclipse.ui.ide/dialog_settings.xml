@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="AnyEditTools:2.6.1.201711281546"/>
+		<item value="org.eclipse.egit:5.0.2.201807311906-r"/>
+		<item value="org.eclipse.emf.common:2.14.0.v20180527-1134"/>
+		<item value="org.eclipse.emf.ecore:2.14.0.v20180529-1144"/>
+		<item value="org.eclipse.epp.mpc:1.7.1.v20180628-1155"/>
+		<item value="org.eclipse.help:2.2.200.v20180611-0500"/>
+		<item value="org.eclipse.jgit:5.0.2.201807311906-r"/>
+		<item value="org.eclipse.platform:4.8.0.v20180611-0656"/>
+		<item value="org.eclipse.rcp:4.8.0.v20180611-0656"/>
+		<item value="org.eclipse.userstorage:1.1.0.v20171225-2054"/>
+		<item value="org.python.pydev.feature:7.0.3.201811082122"/>
+	</list>
+</section>

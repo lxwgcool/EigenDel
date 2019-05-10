@@ -1,0 +1,135 @@
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from mpl_toolkits.mplot3d import Axes3D
+from sklearn.manifold import TSNE
+from sklearn import datasets
+
+def Draw2DPics(samples):    
+    x = []
+    y = []    
+    for i in range(0, len(samples)):
+        x.append(samples[i][0])
+        y.append(samples[i][1])        
+                 
+    npX = np.array(x)
+    npY = np.array(y)    
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.set_xlabel('PC_1', fontsize = 10)
+    ax.set_ylabel('PC_2', fontsize = 10)
+    ax.set_title('2 Component PCA', fontsize = 15)
+    
+    for i in range(0, len(samples)):
+        color = 'g'
+        if i < 59:
+            color = 'r'
+        ax.scatter(npX[i], npY[i], c=color)                
+    plt.show()
+
+
+def Draw3DPics(samples):
+#    fig = plt.figure(figsize = (8,8))
+    
+    #ax = fig.add_subplot(1,1,1) 
+    #ax.set_xlabel('Principal Component 1', fontsize = 15)
+    #ax.set_ylabel('Principal Component 2', fontsize = 15)
+    #ax.set_title('2 Component PCA', fontsize = 20)
+    
+    x = []
+    y = []
+    z = []
+    for i in range(0, len(samples)):
+        x.append(samples[i][0])
+        y.append(samples[i][1])
+        z.append(samples[i][2])
+    
+    print(x)
+    print(y)
+    print(z)             
+    npX = np.array(x)
+    npY = np.array(y)
+    npZ = np.array(z)
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.set_xlabel('PC_1', fontsize = 10)
+    ax.set_ylabel('PC_2', fontsize = 10)
+    ax.set_zlabel('PC_3', fontsize = 10)
+    ax.set_title('3 Component PCA', fontsize = 15)
+    
+    for i in range(0, len(samples)):
+        color = 'g'
+        if i < 56:
+            color = 'r'
+        ax.scatter(npX[i], npY[i], npZ[i], c=color)                
+    plt.show()
+        
+#     targets = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
+#     colors = ['r', 'g', 'b']
+#     for target, color in zip(targets,colors):
+#         indicesToKeep = finalDf['target'] == target
+#         ax.scatter(finalDf.loc[indicesToKeep, 'principal component 1']
+#                    , finalDf.loc[indicesToKeep, 'principal component 2']
+#                    , c = color
+#                    , s = 50)
+#     ax.legend(targets)
+#     ax.grid()
+
+def RunPCA3D(samples):    
+    pca = PCA(n_components=3)
+    #pca = PCA(n_components=2)
+    principalComponents = pca.fit_transform(samples)
+    principalDf = pd.DataFrame(data = principalComponents
+                 , columns = ['PC_1', 'PC_2', 'PC_3']) 
+    #, columns = ['PC_1', 'PC_2'])
+    print(principalDf.head(5))
+    return principalComponents    
+
+def RunPCA(samples):    
+    #pca = PCA(n_components=3)
+    pca = PCA(n_components=2)
+    principalComponents = pca.fit_transform(samples)
+    principalDf = pd.DataFrame(data = principalComponents
+    #             , columns = ['PC_1', 'PC_2', 'PC_3']) 
+    , columns = ['PC_1', 'PC_2'])
+    print(principalDf.head(5))
+    return principalComponents    
+
+def ReadFile(filePath):
+    ofs = open(filePath, "r");
+    lines = ofs.readlines();
+    features = [];
+    for line in lines:
+        features.append(line.split(","))
+    nparryFeatures = np.array(features)
+    nparryFeatures = nparryFeatures.astype(np.int)       
+    return nparryFeatures
+
+#1: Print the input samples
+samples = ReadFile("/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/Samples/CluterPureZero.txt");
+labels = ReadFile("/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/Samples/CluterLabel.txt");
+print(labels)
+print(samples.shape)
+#features = ['No_Sv_Left', 'DC_Left', 'DC_Core', 'DC_Right', 'No_Sv_Right']
+# features = ['DC_Left_Zero_Pure', 'DC_Left_Zero_Week', 'DC_Left_Zero_Mix', 'DC_Left_Rep_Week', 'DC_Left_Rep_Strong', 
+#             'DC_Core_Zero_Pure', 'DC_Core_Zero_Week', 'DC_Core_Zero_Mix', 'DC_Core_Rep_Week', 'DC_Core_Rep_Strong',
+#             'DC_Right_Zero_Pure', 'DC_Right_Zero_Week', 'DC_Right_Zero_Mix', 'DC_Right_Rep_Week', 'DC_Right_Rep_Strong']
+# print(pd.DataFrame(data = samples, columns = features).head())
+
+model = TSNE(learning_rate=100)
+transformed = model.fit_transform(samples)
+x_axis = transformed[:, 0]
+y_axis = transformed[:, 1]
+plt.scatter(x_axis, y_axis, c=labels)
+
+
+#2: Do PCA and print the PCA result (the first 5 samples)
+#3: Draw Pics
+# principalComponents = RunPCA(samples)
+# Draw2DPics(principalComponents)
+
+# principalComponents = RunPCA3D(samples)
+# Draw3DPics(principalComponents)

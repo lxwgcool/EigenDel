@@ -1,0 +1,16 @@
+import numpy as np
+import scipy as sp
+#Let's read the file first 
+
+def ReadPositiveSamples(filename):
+    ofs = open(filename, "r");
+    content = ofs.read();
+    arryFeature = content.split("\t")
+    print(arryFeature.shape)
+    print(arryFeature)
+    return;
+
+
+#This is the man function
+strPositiveFilePath = "/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/PositiveSamples.txt";
+ReadPositiveSamples(strPositiveFilePath)

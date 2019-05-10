@@ -1,0 +1,27 @@
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+
+def ReadFile(filePath):
+    ofs = open(filePath, "r");
+    lines = ofs.readlines();
+    features = [];
+    for line in lines:
+        features.append(line.split(","))
+    nparryFeatures = np.array(features)
+    nparryFeatures = nparryFeatures.astype(np.int)       
+    return nparryFeatures
+
+#1: Print the input samples
+samples = ReadFile("./Positive/PositiveSamplesDepthInfo.txt");
+features = ['No_Sv_Left', 'DC_Left', 'DC_Core', 'DC_Right', 'No_Sv_Right']
+print(pd.DataFrame(data = samples, columns = features).head())
+
+#2: Do PCA
+pca = PCA(n_components=2)
+principalComponents = pca.fit_transform(samples)
+principalDf = pd.DataFrame(data = principalComponents
+             , columns = ['principal component 1', 'principal component 2'])
+principalDf.head(5)

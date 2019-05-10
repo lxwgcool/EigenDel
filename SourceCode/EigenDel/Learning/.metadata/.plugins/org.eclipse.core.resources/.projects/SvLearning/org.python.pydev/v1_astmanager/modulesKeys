@@ -1,0 +1,9 @@
+MODULES_MANAGER_V2
+DrawComparisonPics|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/DrawComparisonPics.py
+DrawImage|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/DrawImage.py
+F1_Inter_glioblastoma|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/F1_Inter_glioblastoma.py
+F1_NA12878|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/F1_NA12878.py
+SvClutering|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/SvClutering.py
+SvTraning|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/SvTraning.py
+TrainingFunc|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/TrainingFunc.py
+create_bam_index|/home/xin/lxwg/WorkStudio/Prototype/SV_Draft/SvDelPainter/Learning/SvLearning/create_bam_index.py
