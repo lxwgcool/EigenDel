@@ -11,6 +11,7 @@ This is the introduction of how to compile and use EigenDel
 (2) Picard v2.0.1
 (3) gcc v5.4.0 or higher 
 (4) python 3 with scikit-learn be installed 
+(5) zlib
 
 Notice: 
 (1)Picard v2.0.1 requires Java 1.8 (jdk8u66) and R.
