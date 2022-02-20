@@ -10,7 +10,9 @@
 //#include "clsdrawimage.h"
 #include <map>
 
-#include "../../../ShareLibrary/bamtools/include/api/BamReader.h"
+//#include "../../../ShareLibrary/bamtools/include/api/BamReader.h"
+#include "../../../ShareLibrary/bamtools/install/include/bamtools/api/BamReader.h"
+
 using namespace BamTools;
 
 using namespace std;
