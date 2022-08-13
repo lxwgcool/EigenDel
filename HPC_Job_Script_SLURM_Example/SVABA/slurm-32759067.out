@@ -1,0 +1,10 @@
+slurmstepd: error: Unable to create TMPDIR [/scratch/lix33/pindeltempdir]: No such file or directory
+slurmstepd: error: Setting TMPDIR to /tmp
+===============
+Sat Feb 19 02:07:56 EST 2022
+===============
+
+mkdir: cannot create directory ‘/var/spool/slurm/slurmd/job32759067/NA12763’: Permission denied
+/var/spool/slurm/slurmd/job32759067/slurm_script: line 47: cd: /var/spool/slurm/slurmd/job32759067/NA12763: No such file or directory
+Running Time: 0hrs 0min 0sec
+Error: Sat Feb 19 02:08:24 EST 2022 run was failed!
